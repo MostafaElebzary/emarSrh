@@ -22,6 +22,7 @@
             border-bottom: 1px solid black;
             padding-bottom: 5px;
         }
+
         table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
@@ -41,14 +42,15 @@
         <div class="col-sm-4" style=" padding-top:10px;font-family: 'Cairo';font-size: 22px;text-align:right">
             <br>
             <br>
-            <strong>{{$maindata->name_ar}} </strong>  <br>
+            <strong>{{$maindata->name_ar}} </strong> <br>
 
             <strong> العنوان : </strong> {{$branch_data->address}} <br>
             <strong> الجوال : </strong> {{$branch_data->phone}} <br>
 
 
         </div>
-        <div class="col-sm-4" style=" padding-top:10px;padding-right:50px;font-family: 'Cairo';font-size: 22px;text-align:right">
+        <div class="col-sm-4"
+             style=" padding-top:10px;padding-right:50px;font-family: 'Cairo';font-size: 22px;text-align:right">
 
             <img src="{{url('uploads/'. $maindata->logo)}}" width="200px" height="200px">
 
@@ -82,32 +84,32 @@
 
             </div>
         </div>
-        <div style="padding-top: 15%" ></div>
+        <div style="padding-top: 15%"></div>
         <div class="container">
-        <div class="col-sm-12 form-group" style="text-align:center;padding-left: 1%">
-            <table>
-                <tr>
-                    <th style="width:15%">المبلغ</th>
-                    <th style="width:15%">المشروع</th>
-                    <th style="width:70%">الوصف</th>
-                </tr>
-                <tr>
-                    <td> {{$reciept->total }}   </td>
-                    <td>{{$reciept->getClient->name}}</td>
-                    <td>{{$reciept->desc}}</td>
+            <div class="col-sm-12 form-group" style="text-align:center;padding-left: 1%">
+                <table>
+                    <tr>
+                        <th style="width:15%">المبلغ</th>
+                        <th style="width:15%">المشروع</th>
+                        <th style="width:70%">الوصف</th>
+                    </tr>
+                    <tr>
+                        <td> {{$reciept->total }}   </td>
+                        <td>{{$reciept->getClient->name}}</td>
+                        <td>{{$reciept->desc}}</td>
 
 
-                </tr>
-            </table>
-        </div>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="col-sm-6 form-group" style="text-align:right;padding-right:30%">
             <div>
                 <strong> المبلغ : </strong>
-                 {{$reciept->total }}   ر.س<br>
+                {{$reciept->total }} ر.س<br>
                 <hr>
-                <strong> الضريبة  /% {{$reciept->getClient->taxepercent}} : </strong>
-                {{$reciept->amount - $reciept->total}}    ر.س<br>
+                <strong> الضريبة /% {{$reciept->getClient->taxepercent}} : </strong>
+                {{$reciept->amount - $reciept->total}} ر.س<br>
                 <hr>
                 <strong> الاجمالى : </strong>
                 {{$reciept->amount}} ر.س<br>
@@ -115,11 +117,19 @@
             </div>
 
         </div>
+        <div class="col-sm-6 form-group" style="text-align:right;padding-right:40%">
+            <div>
+            @php
+                $data = url('taxreset/'.base64_encode($reciept->id));
+            @endphp
+
+            <!-- //QRCODE must have string  -->
+                <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($data, 'QRCODE',5,5)}}" alt="barcode"/>
+
+            </div>
+
+        </div>
         <div class="col-sm-6 form-group"></div>
-
-
-
-
 
 
     </div>

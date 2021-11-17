@@ -110,7 +110,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('recipt/createout', 'cpanel\ReciptsController@createout');
     Route::post('recipt', 'cpanel\ReciptsController@search');
 
-    Route::get('taxreset/{id}', 'cpanel\ReciptsController@taxreset');
 
 //account statements
     Route::resource('account', 'cpanel\AccountStatements');
@@ -183,3 +182,4 @@ Route::get('lang/{lang}', function ($lang) {
 
 
 Route::get('/', 'LandPage@index');
+Route::get('taxreset/{id}', 'cpanel\ReciptsController@taxreset');

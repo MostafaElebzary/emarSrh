@@ -79,7 +79,6 @@ class ClientsController extends Controller
 //        dd($atts);
         if ($request->file != null) {
             foreach ($atts as $key => $att) {
-
                 if ($att['file_name'] != null) {
                     if (array_key_exists($key ,$request->file)) {
                         $files[] = [
@@ -203,7 +202,7 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $reciepts = Reciept::where('client_id',$id)->delete();
         $projects = Client::where('id',$id)->delete();
 

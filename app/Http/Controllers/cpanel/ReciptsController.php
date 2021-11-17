@@ -186,7 +186,8 @@ class ReciptsController extends Controller
 
     public function taxreset($id)
     {
-        $reciept = Reciept::where('id', $id)->first();
+        $id = base64_decode($id);
+        $reciept = Reciept::findOrFail($id);
         $user = User::whereId($reciept->user_id)->first();
         $branch_data = Branch::whereId($user->branch_id)->first();
         $client_id = $reciept->client_id;

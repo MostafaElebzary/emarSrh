@@ -159,7 +159,7 @@
 {{--                            <td>{{$user->desc}}</td>--}}
                             <td>
                                 @if($user->type != 'صرف')
-                                    <a class='btn btn-raised btn-outline-success btn-sml' data-placement="top" title="فاتورة ضريبيه"target="_blank" href="{{url('taxreset/'.$user->id)}}"><i class="fa fa-print"></i>&nbsp;&nbsp; فاتورة ضريبية </a>
+                                    <a class='btn btn-raised btn-outline-success btn-sml' data-placement="top" title="فاتورة ضريبيه" target="_blank" href="{{url('taxreset/'.base64_encode($user->id))}}"><i class="fa fa-print"></i>&nbsp;&nbsp; فاتورة ضريبية </a>
                                 @endif
                                 <a class='btn btn-raised btn-info btn-sml' data-placement="top" title="طباعه"target="_blank" href="{{url('recipts/'.$user->id)}}"><i class="fa fa-print"></i></a>
 
