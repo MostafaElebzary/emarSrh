@@ -37,7 +37,7 @@
         <div class="col-sm-4" style="text-align:right">
             <br>
             <br>
-            <h3>فاتورة ضريبية</h3>
+            <h3>فاتورة ضريبية مبسطة</h3>
         </div>
         <div class="col-sm-4" style=" padding-top:10px;font-family: 'Cairo';font-size: 22px;text-align:right">
             <br>
@@ -103,15 +103,15 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-6 form-group" style="text-align:right;padding-right:30%">
+        <div class="col-sm-6 form-group" style="text-align:right;padding-right:20%">
             <div>
-                <strong> المبلغ : </strong>
+                <strong> المبلغ غير شامل الضريبه : </strong>
                 {{$reciept->total }} ر.س<br>
                 <hr>
-                <strong> الضريبة /% {{$reciept->getClient->taxepercent}} : </strong>
+                <strong> اجمالى الضريبة المضافة /% {{$reciept->getClient->taxepercent}} : </strong>
                 {{$reciept->amount - $reciept->total}} ر.س<br>
                 <hr>
-                <strong> الاجمالى : </strong>
+                <strong> الاجمالى شامل الضريبة : </strong>
                 {{$reciept->amount}} ر.س<br>
                 <hr>
             </div>
@@ -124,7 +124,7 @@
             @endphp
 
             <!-- //QRCODE must have string  -->
-                <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($data, 'QRCODE',5,5)}}" alt="barcode"/>
+                <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($data, 'QRCODE',4,4)}}" alt="barcode"/>
 
             </div>
 
