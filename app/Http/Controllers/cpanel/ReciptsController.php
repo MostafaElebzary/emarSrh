@@ -117,16 +117,17 @@ class ReciptsController extends Controller
 
             $ch = curl_init();
             $url = "http://basic.unifonic.com/rest/SMS/messages";
-            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=".$message."&SenderID=EmarSrh&Recipient=".$mobile_num."&encoding=UTF8&responseType=json"); // define what you want to post
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=" . $message . "&SenderID=EmarSrh&Recipient=" . $mobile_num . "&encoding=UTF8&responseType=json"); // define what you want to post
             //  curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=fetoh@koof-ksa.com&password=fetoh000000&msg=".$Message."&sender=ALKHALIL-GR&to=".$user->phone."&encoding=UTF8"); // define what you want to post
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $output = curl_exec ($ch);
-            curl_close ($ch);
+            $output = curl_exec($ch);
+            curl_close($ch);
         }
 
     }
+
     public function store(Request $request)
     {
         $data = $this->validate(
@@ -181,7 +182,7 @@ class ReciptsController extends Controller
 
         $subtotal = $data_client->amount - $data_client_reciept;
         $maindata = MainData::first();
-        return view('recipts.print', compact('reciept', 'maindata', 'data_client', 'subtotal','branch_data'));
+        return view('recipts.print', compact('reciept', 'maindata', 'data_client', 'subtotal', 'branch_data'));
     }
 
     public function taxreset($id)
@@ -196,7 +197,7 @@ class ReciptsController extends Controller
 
         $subtotal = $data_client->amount - $data_client_reciept;
         $maindata = MainData::first();
-        return view('recipts.taxreset', compact('reciept', 'maindata', 'data_client', 'subtotal','branch_data'));
+        return view('recipts.taxreset', compact('reciept', 'maindata', 'data_client', 'subtotal', 'branch_data'));
     }
 
     /**
@@ -228,23 +229,29 @@ class ReciptsController extends Controller
 
             case trans('admin.search'):
 
+                $query = Reciept::whereBetween('date', array($request->fromdate, $request->todate));
+
                 if ($request->pay_type == 'all') {
-                    $reciepts = Reciept::whereBetween('date', array($request->fromdate, $request->todate))
-                        ->where('type', $request->type)
-                        ->get();
+                    $query = $query->where('type', $request->type);
+
                 } else {
-                    $reciepts = Reciept::whereBetween('date', array($request->fromdate, $request->todate))
-                        ->where('type', $request->type)->where('pay_type', $request->pay_type)
-                        ->get();
+                    $query = $query->where('type', $request->type)->where('pay_type', $request->pay_type);
+
                 }
+                if ($request->branch_id) {
+                    $query = $query->whereHas('getUser', function ($q) use ($request) {
+                        $q->where('branch_id', $request->branch_id);
+                    });
+                }
+
+                $reciepts = $query->get();
                 return view('recipts.index', \compact('reciepts'));
                 break;
 
 
-
             case trans('admin.inexcel'):
 
-                return (new RecieptsExcel($request->pay_type, $request->fromdate, $request->todate,$request->type))->download('ارشيف السندات.xlsx');
+                return (new RecieptsExcel($request->pay_type, $request->fromdate, $request->todate, $request->type,$request->branch_id))->download('ارشيف السندات.xlsx');
                 break;
 
 

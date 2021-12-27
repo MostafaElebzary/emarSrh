@@ -90,18 +90,18 @@
                     </div>
 
                 </div>
-{{--                <div class="">--}}
-{{--                    <div class="form-group col-sm-6 row">--}}
-{{--                        <label for="example-text-input" class="col-sm-2">{{trans('admin.client_name')}}</label>--}}
+                <div class="">
+                    <div class="form-group col-sm-6 row">
+                        <label for="example-text-input" class="col-sm-2">الفرع</label>
 
-{{--                        <div class="col-sm-10">--}}
+                        <div class="col-sm-10">
 
-{{--                            {{ Form::select('client_id',App\Client::pluck('name','id'),old('client_id')--}}
-{{--                         ,["class"=>"form-control client_id " ]) }}--}}
+                            {{ Form::select('branch_id',App\Branch::pluck('name','id'),old('branch_id')
+                         ,["class"=>"form-control branch_id " ]) }}
 
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                 {!! Form::submit( trans('admin.search') , ['class' => 'btn btn-info col-sm-6', 'name' => 'submitbutton', 'value' => 'search'])!!}
                 {!! Form::submit( trans('admin.inexcel'), ['class' => 'btn btn-success col-sm-6', 'name' => 'submitbutton', 'value' => 'inexcel'])!!}

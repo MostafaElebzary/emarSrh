@@ -61,9 +61,7 @@
         <div class="col-sm-6 form-group" style="text-align:right;padding-right:50px">
             <div>
                 <?php
-
                 $obj = new I18N_Arabic('Numbers');
-
                 ?>
                 <strong>مبلغ وقدره </strong> / {{$obj->int2str($reciept->amount)}} <strong> ر.س فقط لا غير</strong>
             </div>
