@@ -119,12 +119,12 @@
         </div>
         <div class="col-sm-6 form-group" style="text-align:right;padding-right:40%">
             <div>
-            @php
-                $data = url('taxreset/'.base64_encode($reciept->id));
-            @endphp
+{{--            @php--}}
+{{--                $data = $QRCode;--}}
+{{--            @endphp--}}
 
             <!-- //QRCODE must have string  -->
-                <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($data, 'QRCODE',4,4)}}" alt="barcode"/>
+                <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($QRCode, 'QRCODE',4,4)}}" alt="barcode"/>
 
             </div>
 

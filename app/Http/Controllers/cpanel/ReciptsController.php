@@ -197,7 +197,18 @@ class ReciptsController extends Controller
 
         $subtotal = $data_client->amount - $data_client_reciept;
         $maindata = MainData::first();
-        return view('recipts.taxreset', compact('reciept', 'maindata', 'data_client', 'subtotal', 'branch_data'));
+
+        $generatedString = [
+            $this->toString($maindata->name_ar, '1'), //اسم الشركه
+            $this->toString("300419725400003", '2'), // الرقم الضريبي
+            $this->toString($reciept->created_at, '3'), // تاريخ ووقت الفاتورة
+            $this->toString($reciept->amount, '4'), // المبلغ بعد الضريبة
+            $this->toString($reciept->amount - $reciept->total, '5'), // مبلغ الضريبة
+        ];
+
+        $QRCode = $this->toBase64($generatedString);
+
+        return view('recipts.taxreset', compact('QRCode','reciept', 'maindata', 'data_client', 'subtotal', 'branch_data'));
     }
 
     /**
@@ -251,7 +262,7 @@ class ReciptsController extends Controller
 
             case trans('admin.inexcel'):
 
-                return (new RecieptsExcel($request->pay_type, $request->fromdate, $request->todate, $request->type,$request->branch_id))->download('ارشيف السندات.xlsx');
+                return (new RecieptsExcel($request->pay_type, $request->fromdate, $request->todate, $request->type, $request->branch_id))->download('ارشيف السندات.xlsx');
                 break;
 
 
@@ -270,5 +281,33 @@ class ReciptsController extends Controller
         $cat->delete();
         session()->flash('success', trans('admin.deletesuccess'));
         return redirect(url('recipts'));
+    }
+
+
+    public function toBase64($value): string
+    {
+        return base64_encode($this->toTLV($value));
+    }
+
+    public function toTLV($value): string
+    {
+        return implode('', $value);
+    }
+
+    public function toString($value, $tag)
+    {
+        $value = (string)$value;
+
+        return $this->toHex($tag) . $this->toHex($this->getLength($value)) . ($value);
+    }
+
+    protected function toHex($value)
+    {
+        return pack("H*", sprintf("%02X", $value));
+    }
+
+    public function getLength($value)
+    {
+        return strlen($value);
     }
 }
