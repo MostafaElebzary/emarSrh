@@ -119,7 +119,7 @@ class ReciptsController extends Controller
             $url = "http://basic.unifonic.com/rest/SMS/messages";
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=" . $message . "&SenderID=EmarSrh&Recipient=" . $mobile_num . "&encoding=UTF8&responseType=json"); // define what you want to post
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=su7G9tOZc6U0kPVnoeiJGHUDMKe8tp&Body=" . $message . "&SenderID=EmarSrh&Recipient=" . $mobile_num . "&encoding=UTF8&responseType=json"); // define what you want to post
             //  curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=fetoh@koof-ksa.com&password=fetoh000000&msg=".$Message."&sender=ALKHALIL-GR&to=".$user->phone."&encoding=UTF8"); // define what you want to post
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $output = curl_exec($ch);
