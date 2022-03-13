@@ -41,6 +41,7 @@ class MainClientController extends Controller
                 'name' => 'required',
                 'id_num' => 'required',
                 'address' => 'required',
+                'type' => 'required|in:0,1',
                 'phone' => 'required|unique:main_clients|regex:/(9665)[0-9]{7}/',
             ]
         );
@@ -89,9 +90,12 @@ class MainClientController extends Controller
                 'name' => 'required',
                 'id_num' => 'required',
                 'address' => 'required',
+                'type' => 'required|in:0,1',
                 'phone' => 'required|regex:/(9665)[0-9]{7}/|unique:main_clients,phone,' . $id,
             ]
         );
+
+
 
         MainClient::where('id', $id)->update($data);
         session()->flash('success', trans('admin.updatedsuccess'));

@@ -59,6 +59,7 @@
                         <tr style='text-align:center; font-family: Cairo;font-size: 18px;'>
                             <th>#</th>
                             <th>{{trans('admin.Name')}}</th>
+                            <th>النوع</th>
                             <th>{{trans('admin.phone')}}</th>
                             <th>{{trans('admin.address')}}</th>
                             <th>{{trans('admin.id_num')}}</th>
@@ -76,6 +77,7 @@
                         <tr style='text-align:center'>
                             <td>{{$i}}</td>
                             <td>{{$user->name}}</td>
+                            <td>{{$user->type == 0 ? "عميل " : "شركة توريد"}}</td>
                             <td>{{$user->phone}}</td>
                             <td>{{$user->address}}</td>
                             <td>{{$user->id_num}}</td>

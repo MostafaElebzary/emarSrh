@@ -19,7 +19,8 @@ class AccountStatements extends Controller
     {
         $contract = null;
         $inreciept = null;
-        return view('clients.account', compact('contract', 'inreciept'));
+        $outreciept = null;
+        return view('clients.account', compact('contract', 'inreciept','outreciept'));
     }
 
     /**
@@ -50,10 +51,12 @@ class AccountStatements extends Controller
         $contract = Client::where('id', $request->client_id)->first();
         $inreciept = Reciept::where('type', 'قبض')
             ->where('client_id', $request->client_id)->get();
+        $outreciept = Reciept::where('type', 'صرف')
+            ->where('client_id', $request->client_id)->get();
 
 
         // session()->flash('success', trans('admin.updatedsuccess'));
-        return view('clients.account', compact('contract', 'inreciept'));
+        return view('clients.account', compact('contract', 'inreciept','outreciept'));
     }
 
     /**
@@ -72,8 +75,10 @@ class AccountStatements extends Controller
         $contract = Client::where('id', $id)->first();
         $inreciept = Reciept::where('type', 'قبض')
             ->where('client_id', $id)->get();
+        $outreciept = Reciept::where('type', 'صرف')
+            ->where('client_id', $id)->get();
         $maindata = MainData::first();
-        return view('clients.printaccount', compact('contract', 'inreciept','maindata'));
+        return view('clients.printaccount', compact('contract', 'inreciept','maindata','outreciept'));
     }
 
     /**

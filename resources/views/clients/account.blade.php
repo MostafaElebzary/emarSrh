@@ -200,8 +200,25 @@
                         <thead style="font-family: Cairo;font-size: 18px;">
                         <tr style='text-align:center; font-family: Cairo;font-size: 18px;'>
                             <th>#</th>
-                            <th>{{trans('admin.payddate')}}</th>
-                            <th>{{trans('admin.paytotal')}}</th>
+                            <th>تاريخ سند
+                                @if($contract)
+                                    @if($contract->getMainClient->type == 0)
+                                        القبض
+                                    @else
+                                        الصرف
+                                    @endif
+                                @endif
+
+                            </th>
+                            <th> قيمة سند
+                                @if($contract)
+                                    @if($contract->getMainClient->type == 0)
+                                        القبض
+                                    @else
+                                        الصرف
+                                    @endif
+                                @endif
+                            </th>
                         </tr>
                         </thead>
 
@@ -210,20 +227,39 @@
                         @php
                             $i = 1;
                         @endphp
-                        @if($inreciept != null)
-                            @foreach($inreciept as $user)
+                        @if($contract)
+                            @if($contract->getMainClient->type == 0)
+                                @if($inreciept != null)
+                                    @foreach($inreciept as $user)
 
-                                <tr style='text-align:center'>
-                                    <td>{{$i}}</td>
-                                    <td>{{$user->date}}</td>
-                                    <td>{{$user->amount}}</td>
+                                        <tr style='text-align:center'>
+                                            <td>{{$i}}</td>
+                                            <td>{{$user->date}}</td>
+                                            <td>{{$user->amount}}</td>
 
-                                </tr>
+                                        </tr>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                    @endforeach
+                                @endif
 
-                                @php
-                                    $i++;
-                                @endphp
-                            @endforeach
+                            @else
+                                @if($outreciept != null)
+                                    @foreach($outreciept as $user)
+
+                                        <tr style='text-align:center'>
+                                            <td>{{$i}}</td>
+                                            <td>{{$user->date}}</td>
+                                            <td>{{$user->amount}}</td>
+
+                                        </tr>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                    @endforeach
+                                @endif
+                            @endif
                         @endif
                         </tbody>
                     </table>
@@ -257,10 +293,19 @@
                             <div for="example-text-input"
                                  class="col-sm-6 col-form-label">{{trans('admin.paymentstotal')}}</div>
                             <div class="col-sm-6">
-                                @if($inreciept !=null)
-                                    {{$inreciept->sum('amount')}}
-                                @else
-                                    -----
+                                @if($contract)
+                                    @if($contract->getMainClient->type == 0)
+                                        @if($inreciept !=null)
+                                            {{$inreciept->sum('amount')}}
+                                        @else
+                                            -----
+                                        @endif
+                                    @else
+                                        @if($outreciept !=null)
+                                            {{$outreciept->sum('amount')}}
+                                        @else
+                                        @endif
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -268,10 +313,20 @@
                             <div for="example-text-input"
                                  class="col-sm-6 col-form-label">{{trans('admin.subtotal')}}</div>
                             <div class="col-sm-6">
-                                @if($inreciept !=null && $contract !=null)
-                                    {{$contract->amount - $inreciept->sum('amount')}}
-                                @else
-                                    -----
+                                @if($contract)
+                                    @if($contract->getMainClient->type == 0)
+                                        @if($inreciept !=null && $contract !=null)
+                                            {{$contract->amount - $inreciept->sum('amount')}}
+                                        @else
+                                            -----
+                                        @endif
+                                    @else
+                                        @if($inreciept !=null && $contract !=null)
+                                            {{$contract->amount - $outreciept->sum('amount')}}
+                                        @else
+                                            -----
+                                        @endif
+                                    @endif
                                 @endif
                             </div>
                         </div>
