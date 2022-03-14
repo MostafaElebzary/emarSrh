@@ -2,7 +2,8 @@
           <div class="container-fluid">
                 <div class="row">
                     <div class="col-12" style="font-size: 12px;">
-                     {{date('Y')}} © UramIT-EG <span class="text-muted hide-phone pull-right">
+                     {{date('Y')}} © UramIT <span class="text-muted hide-phone pull-right">
+                        </span>
                     </div>
                 </div>
          </div>

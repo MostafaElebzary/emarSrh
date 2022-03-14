@@ -73,12 +73,12 @@
                         <label for="example-text-input" class="col-sm-3">النوع</label>
 
                         <div class="col-sm-4">
-                            <label for="ee" class="col-sm-3">عميل</label>
                             <input type="radio" id="ee" class="radio radio-inline" name="type" value="0" checked>
+                            <label for="ee" class="col-sm-3">  <b>عميل</b>  </label>
                         </div>
                         <div class="col-sm-4">
-                            <label for="te" class="col-sm-3">شركة توريد</label>
                             <input type="radio" id="te" class="radio radio-inline" name="type" value="1">
+                            <label for="te" class="col-sm-3"> <b>شركة/مورد</b> </label>
                         </div>
                     </div>
 

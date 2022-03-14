@@ -77,7 +77,7 @@
                         <tr style='text-align:center'>
                             <td>{{$i}}</td>
                             <td>{{$user->name}}</td>
-                            <td>{{$user->type == 0 ? "عميل " : "شركة توريد"}}</td>
+                            <td>{{$user->type == 0 ? "عميل " : "شركة/مورد"}}</td>
                             <td>{{$user->phone}}</td>
                             <td>{{$user->address}}</td>
                             <td>{{$user->id_num}}</td>
