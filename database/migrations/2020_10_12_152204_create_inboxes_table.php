@@ -13,7 +13,7 @@ class CreateInboxesTable extends Migration
      */
     public function up()
     {
-        Schema::create('inboxes', function (Blueprint $table) {
+            Schema::create('inboxes', function (Blueprint $table) {
             $table->id();
             $table->string('fullname');
             $table->string('phone');

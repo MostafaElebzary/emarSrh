@@ -16,7 +16,7 @@ class CreatePermissionsTable extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->enum('inbox',['yes','no'])->default('no');
             $table->enum('deleteinbox',['yes','no'])->default('no');
@@ -32,8 +32,10 @@ class CreatePermissionsTable extends Migration
             $table->enum('controllpanel',['yes','no'])->default('no');
             $table->enum('homeinreciept',['yes','no'])->default('no');
             $table->enum('homeoutreciept',['yes','no'])->default('no');
-
-
+            $table->enum('branch_trans',['yes','no'])->default('no');
+            $table->enum('all_trans',['yes','no'])->default('no');
+            $table->enum('branch_reciepts',['yes','no'])->default('no');
+            $table->enum('all_reciepts',['yes','no'])->default('no');
             $table->timestamps();
         });
     }

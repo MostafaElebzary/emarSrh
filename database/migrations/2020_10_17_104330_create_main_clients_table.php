@@ -19,6 +19,7 @@ class CreateMainClientsTable extends Migration
             $table->string('address');
             $table->string('phone')->unique();
             $table->bigInteger('id_num');
+            $table->integer('type')->default(0);
             $table->timestamps();
         });
     }

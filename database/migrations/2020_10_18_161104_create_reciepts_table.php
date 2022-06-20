@@ -15,16 +15,16 @@ class CreateRecieptsTable extends Migration
     {
         Schema::create('reciepts', function (Blueprint $table) {
             $table->id();
-            
+
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->enum('type',['قبض','صرف'])->default('قبض');
             $table->date('date');
-            $table->enum('pay_type',['شبكه','نقد'])->default('نقد');
+            $table->enum('pay_type',['شبكه','نقد','شيك','تحويل'])->default('نقد');
             $table->bigInteger('amount');
-            $table->string('desc'); 
+            $table->string('desc');
             $table->bigInteger('taxepercent');
             $table->bigInteger('total');
             $table->timestamps();

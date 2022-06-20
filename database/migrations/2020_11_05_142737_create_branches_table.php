@@ -14,8 +14,10 @@ class CreateBranchesTable extends Migration
     public function up()
     {
         Schema::create('branches', function (Blueprint $table) {
-            $table->id(); 
+            $table->id();
             $table->string('name');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
              $table->timestamps();
         });
     }
