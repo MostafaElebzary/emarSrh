@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes([
-
     'register' => false,
     'verify' => false,
     'reset' => false
@@ -30,7 +29,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //permission
     Route::resource('permission', 'admin\permissionController');
-
     // maindata
     Route::resource('maindata', 'websitePanel\MainDataController');
     //manager word
@@ -165,7 +163,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-
 Route::get('lang/{lang}', function ($lang) {
 
     if (session()->has('lang')) {
@@ -179,7 +176,6 @@ Route::get('lang/{lang}', function ($lang) {
 
     return back();
 });
-
 
 Route::get('/', 'LandPage@index');
 Route::get('taxreset/{id}', 'cpanel\ReciptsController@taxreset');
