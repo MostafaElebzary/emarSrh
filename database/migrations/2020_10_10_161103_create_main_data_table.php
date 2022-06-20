@@ -35,6 +35,7 @@ class CreateMainDataTable extends Migration
             $table->string('address_ar');
             $table->string('address_en');
             $table->string('contact_number');
+            $table->string('numberofmessages');
 
             $table->string('daysclosed');
 

@@ -16,9 +16,9 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('number');
-            $table->bigInteger('amount');
+            $table->bigInteger('amount')->nullable();
             $table->string('name');
-            $table->date('payment_date');
+            $table->date('payment_date')->nullable();
             $table->bigInteger('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();

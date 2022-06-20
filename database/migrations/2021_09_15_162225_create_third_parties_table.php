@@ -17,11 +17,9 @@ class CreateThirdPartiesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->string('email');
-            $table->string('mobile');
+            $table->string('email')->nullable();
+            $table->string('mobile')->nullable();
             $table->enum('type', ['export', 'import', 'all'])->default('all');
-
-
             $table->timestamps();
         });
     }

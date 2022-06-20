@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            
             $table->bigInteger('branch_id')->unsigned();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('name');
