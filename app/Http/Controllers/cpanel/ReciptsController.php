@@ -185,7 +185,7 @@ class ReciptsController extends Controller
         return view('recipts.print', compact('reciept', 'maindata', 'data_client', 'subtotal', 'branch_data'));
     }
 
-    public function taxreset($id)
+    public function taxreset(Request $request,$id)
     {
         $id = base64_decode($id);
         $reciept = Reciept::findOrFail($id);
@@ -207,8 +207,12 @@ class ReciptsController extends Controller
         ];
 
         $QRCode = $this->toBase64($generatedString);
-
-        return view('recipts.taxreset', compact('QRCode','reciept', 'maindata', 'data_client', 'subtotal', 'branch_data'));
+        if($request->has('type')){
+            $type = $request->type;
+        }else{
+            $type = null;
+        }
+        return view('recipts.taxreset', compact('type','QRCode','reciept', 'maindata', 'data_client', 'subtotal', 'branch_data'));
     }
 
     /**
