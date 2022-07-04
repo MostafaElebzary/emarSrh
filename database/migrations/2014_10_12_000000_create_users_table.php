@@ -15,9 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->bigInteger('branch_id')->unsigned();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
-            $table->string('name');
             $table->enum('type',['admin','user'])->default('user');
             $table->string('job');
             $table->string('mobile')->unique();

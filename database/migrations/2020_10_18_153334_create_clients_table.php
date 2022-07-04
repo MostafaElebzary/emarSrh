@@ -19,16 +19,15 @@ class CreateClientsTable extends Migration
             $table->foreign('projecttype_id')->references('id')->on('project_types')->onDelete('cascade');
             $table->bigInteger('mainclient_id')->unsigned();
             $table->foreign('mainclient_id')->references('id')->on('main_clients')->onDelete('cascade');
-
             $table->string('name');
-            $table->string('address');
-            $table->string('phone')->unique();
-            $table->bigInteger('id_num');
-            $table->bigInteger('check_num');
-            $table->date('check_date');
+            $table->string('address')->nullable();
+            $table->string('phone')->unique()->nullable();
+            $table->bigInteger('id_num')->nullable();
+            $table->bigInteger('check_num')->nullable();
+            $table->date('check_date')->nullable();
+            $table->bigInteger('amount');
             $table->bigInteger('taxepercent');
             $table->bigInteger('total');
-            $table->bigInteger('amount');
             $table->string('part_number');
             $table->string('scheme_number');
             $table->timestamps();
