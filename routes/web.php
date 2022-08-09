@@ -23,6 +23,37 @@ Auth::routes([
 
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/Categories', [\App\Http\Controllers\admin\CategoryController::class, 'index'])->middleware('can:Categories');
+    Route::get('/CategoriesSearch', [\App\Http\Controllers\admin\CategoryController::class, 'Search']);
+    Route::get('/Edit_Categories', [\App\Http\Controllers\admin\CategoryController::class, 'edit']);
+    Route::post('/Create_Categories', [\App\Http\Controllers\admin\CategoryController::class, 'store']);
+    Route::get('/Delete_Categories', [\App\Http\Controllers\admin\CategoryController::class, 'delete']);
+    Route::post('/Update_Catgories', [\App\Http\Controllers\admin\CategoryController::class, 'update']);
+
+
+    Route::get('/SubCategory/{id}', [\App\Http\Controllers\admin\SubCategoryController::class, 'index'])->middleware('can:Categories');
+    Route::get('/SubCategorySearch', [\App\Http\Controllers\admin\SubCategoryController::class, 'Search']);
+    Route::get('/Edit_SubCategory', [\App\Http\Controllers\admin\SubCategoryController::class, 'edit']);
+    Route::post('/Create_SubCategory', [\App\Http\Controllers\admin\SubCategoryController::class, 'store']);
+    Route::get('/Delete_SubCategory', [\App\Http\Controllers\admin\SubCategoryController::class, 'delete']);
+    Route::post('/Update_SubCategory', [\App\Http\Controllers\admin\SubCategoryController::class, 'update']);
+//    Receipt_type
+
+
+//    cities
+    Route::get('/Cities', [\App\Http\Controllers\admin\CityController::class, 'index'])->middleware('can:Cities');
+    Route::post('/create-city', [\App\Http\Controllers\admin\CityController::class, 'store']);
+    Route::get('/edit-city', [\App\Http\Controllers\admin\CityController::class, 'edit']);
+    Route::post('/update-city', [\App\Http\Controllers\admin\CityController::class, 'update']);
+    Route::get('/delete-city', [\App\Http\Controllers\admin\CityController::class, 'delete']);
+//    districts
+    Route::get('/District', [\App\Http\Controllers\admin\DistrictController::class, 'index'])->middleware('can:District');
+    Route::post('/create-district', [\App\Http\Controllers\admin\DistrictController::class, 'store']);
+    Route::get('/edit-district', [\App\Http\Controllers\admin\DistrictController::class, 'edit']);;
+    Route::post('/update-district', [\App\Http\Controllers\admin\DistrictController::class, 'update']);
+    Route::get('/delete-district', [\App\Http\Controllers\admin\DistrictController::class, 'delete']);
+
     //users
     Route::resource('users', 'admin\usersController');
     Route::get('users/{id}/delete', 'admin\usersController@destroy');
