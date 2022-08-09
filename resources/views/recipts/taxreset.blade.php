@@ -37,8 +37,13 @@
         <div class="col-sm-4" style="text-align:right">
             <br>
             <br>
-            <h3>فاتورة ضريبية مبسطة</h3>
+            @if($type)
+                <h3>فاتورة ضريبية </h3>
+            @else
+                <h3>فاتورة ضريبية مبسطة</h3>
+            @endif
         </div>
+
         <div class="col-sm-4" style=" padding-top:10px;font-family: 'Cairo';font-size: 22px;text-align:right">
             <br>
             <br>
@@ -119,9 +124,9 @@
         </div>
         <div class="col-sm-6 form-group" style="text-align:right;padding-right:40%">
             <div>
-{{--            @php--}}
-{{--                $data = $QRCode;--}}
-{{--            @endphp--}}
+            {{--            @php--}}
+            {{--                $data = $QRCode;--}}
+            {{--            @endphp--}}
 
             <!-- //QRCODE must have string  -->
                 <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($QRCode, 'QRCODE',4,4)}}" alt="barcode"/>
