@@ -152,7 +152,9 @@ class ReciptsController extends Controller
             }
         }
         $data['user_id'] = Auth::user()->id;
-        dd($data);
+        $time = strtotime($request->date);
+        $newformat = date('Y-m-d',$time);
+        dd($newformat);
         $reciept = Reciept::create($data);
         if ($request->type == 'قبض') {
             if ($request->sendsms == 'yes') {
