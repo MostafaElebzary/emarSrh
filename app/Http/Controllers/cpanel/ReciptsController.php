@@ -135,7 +135,7 @@ class ReciptsController extends Controller
             [
                 'client_id' => 'required',
                 'type' => 'required',
-                'date' => 'required',
+                'date' => 'required|date',
                 'pay_type' => 'required',
                 'taxepercent' => 'sometimes|nullable',
                 'total' => 'required',
@@ -154,7 +154,7 @@ class ReciptsController extends Controller
         $data['user_id'] = Auth::user()->id;
         $time = strtotime($request->date);
         $newformat = date('Y-m-d',$time);
-        dd($newformat);
+        $data['date'] = $newformat;
         $reciept = Reciept::create($data);
         if ($request->type == 'قبض') {
             if ($request->sendsms == 'yes') {
