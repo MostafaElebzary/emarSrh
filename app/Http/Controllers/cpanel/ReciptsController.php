@@ -135,7 +135,7 @@ class ReciptsController extends Controller
             [
                 'client_id' => 'required',
                 'type' => 'required',
-                'date' => 'required|date',
+                'date' => 'required',
                 'pay_type' => 'required',
                 'taxepercent' => 'sometimes|nullable',
                 'total' => 'required',
