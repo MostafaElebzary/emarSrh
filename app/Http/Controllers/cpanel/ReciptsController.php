@@ -152,6 +152,7 @@ class ReciptsController extends Controller
             }
         }
         $data['user_id'] = Auth::user()->id;
+        dd($data);
         $reciept = Reciept::create($data);
         if ($request->type == 'قبض') {
             if ($request->sendsms == 'yes') {
